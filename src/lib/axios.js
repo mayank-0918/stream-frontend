@@ -11,4 +11,7 @@ import axios from "axios"
  export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_STREAM_URL,
   withCredentials: true,
+  headers: {
+    'Accept': 'application/json',
+  },
 });
