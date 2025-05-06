@@ -7,12 +7,12 @@
 //   withCredentials: true, // send cookies with the request
 // });
 
-import axios from "axios"
- export const axiosInstance = axios.create({
+import axios from 'axios';
+
+export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_STREAM_URL,
-  withCredentials: true,
+  withCredentials: true,  // Ensure cookies are sent with requests
   headers: {
     'Accept': 'application/json',
-    'Authorization': `Bearer ${jwt}`,
   },
 });
