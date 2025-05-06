@@ -13,5 +13,6 @@ import axios from "axios"
   withCredentials: true,
   headers: {
     'Accept': 'application/json',
+    'Authorization': `Bearer ${jwt}`,
   },
 });
