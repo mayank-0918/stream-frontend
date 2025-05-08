@@ -13,13 +13,14 @@ const SignUpPage = () => {
   const navigate = useNavigate();
   const { isPending, error, signupMutation } = useSignUp();
 
-  const handleSignup = async(e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-     await signupMutation(signupData, () => {
-      console.log("Redirecting to login...");
+    await signupMutation(signupData, () => {
+      alert("Redirecting to login..."); // Add an alert to check if the callback is triggered
       navigate("/login");
     });
   };
+  
   
 
   return (
