@@ -15,7 +15,8 @@ const SignUpPage = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
-    signupMutation(signupData, () => navigate("/login"));
+    const res= signupMutation(signupData, () => navigate("/login"));
+    console.log(res)
   };
 
   return (
