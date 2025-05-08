@@ -15,9 +15,12 @@ const SignUpPage = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
-    const res= signupMutation(signupData, () => navigate("/login"));
-    console.log(res)
+    signupMutation(signupData, () => {
+      console.log("Redirecting to login...");
+      navigate("/login");
+    });
   };
+  
 
   return (
     <div
