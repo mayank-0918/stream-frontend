@@ -3,17 +3,22 @@ import { login } from "../lib/api";
 
 const useLogin = () => {
   const queryClient = useQueryClient();
+  let onSuccessCallbackRef = null;
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: login,
+    onMutate: async () => {
+      return { onSuccessCallback: onSuccessCallbackRef };
+    },
     onSuccess: (_, __, context) => {
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
-      context?.onSuccessCallback?.(); // Trigger callback if provided
+      context?.onSuccessCallback?.(); // ✅ redirects after login
     },
   });
 
   const loginMutation = (loginData, onSuccessCallback) => {
-    mutate(loginData, { context: { onSuccessCallback } });
+    onSuccessCallbackRef = onSuccessCallback;
+    mutate(loginData);
   };
 
   return { error, isPending, loginMutation };

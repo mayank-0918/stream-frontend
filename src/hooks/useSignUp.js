@@ -7,7 +7,7 @@ const useSignUp = () => {
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: signup,
-    onMutate: async (variables) => {
+    onMutate: async () => {
       // store the callback
       return { onSuccessCallback: onSuccessCallbackRef };
     },
