@@ -15,6 +15,7 @@ const SignUpPage = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    alert("submitting..");
     await signupMutation(signupData, () => {
       alert("Redirecting to login..."); // Add an alert to check if the callback is triggered
       navigate("/login");
