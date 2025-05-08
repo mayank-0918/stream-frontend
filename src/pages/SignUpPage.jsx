@@ -13,9 +13,9 @@ const SignUpPage = () => {
   const navigate = useNavigate();
   const { isPending, error, signupMutation } = useSignUp();
 
-  const handleSignup = (e) => {
+  const handleSignup = async(e) => {
     e.preventDefault();
-    signupMutation(signupData, () => {
+     await signupMutation(signupData, () => {
       console.log("Redirecting to login...");
       navigate("/login");
     });
