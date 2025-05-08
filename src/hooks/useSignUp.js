@@ -1,26 +1,28 @@
-
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signup } from "../lib/api";
 
 const useSignUp = () => {
   const queryClient = useQueryClient();
+  let onSuccessCallbackRef = null;
 
   const { mutate, isPending, error } = useMutation({
-    mutationFn: signup, // <- no wrapping needed
+    mutationFn: signup,
+    onMutate: async (variables) => {
+      // store the callback
+      return { onSuccessCallback: onSuccessCallbackRef };
+    },
     onSuccess: (_, __, context) => {
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
-      context?.onSuccessCallback?.(); // ✅ this will redirect
+      context?.onSuccessCallback?.(); // this will now work correctly
     },
   });
 
   const signupMutation = (signupData, onSuccessCallback) => {
-    mutate(signupData, {
-      context: { onSuccessCallback }, // ✅ correct usage
-    });
+    onSuccessCallbackRef = onSuccessCallback; // save ref before calling mutate
+    mutate(signupData);
   };
 
   return { isPending, error, signupMutation };
 };
 
-export default useSignUp;
+export default useSignUp
